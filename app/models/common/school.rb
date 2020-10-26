@@ -1,2 +1,2 @@
-class School < CommonBase
+class Common::School < Common::Base
 end
