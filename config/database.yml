@@ -11,6 +11,7 @@ development:
   common:
     <<: *default
     database: rails_app_common_development
+    migrations_paths: db/common_migrate
   common_replica:
     <<: *default
     database: rails_app_common_development
@@ -18,6 +19,7 @@ development:
   school:
     <<: *default
     database: rails_app_school_development
+    migrations_paths: db/school_migrate
   school_replica:
     <<: *default
     database: rails_app_school_development
