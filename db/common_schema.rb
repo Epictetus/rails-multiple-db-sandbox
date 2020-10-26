@@ -13,11 +13,11 @@
 ActiveRecord::Schema.define(version: 2020_10_26_154756) do
 
   create_table "schools", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
     t.bigint "school_id", null: false
     t.index ["school_id"], name: "index_users_on_school_id"
   end
