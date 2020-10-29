@@ -68,7 +68,7 @@ $ bin/rails db:migrate:school  # schoolデータベースのマイグレーシ�
 ### モデルファイルの作成
 
 - `app/models/common/teacher.rb`を作成する
-  - `Common::Base`を継承したクラスを作成する
+  - **Common::Baseを継承した**クラスを作成する
 
 ```rb:app/models/common/teacher.rb
 class Common::Teacher < Common::Base
@@ -76,7 +76,7 @@ end
 ```
 
 - `app/models/school/teacher.rb`を作成する
-  - `School::Base`を継承したクラスを作成する
+  - **School::Baseを継承した**クラスを作成する
 
 ```rb:app/models/school/teacher.rb
 class School::Teacher < School::Base
