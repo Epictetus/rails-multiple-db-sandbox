@@ -17,7 +17,7 @@ ruby 2.7.1p83
 $ rails -v
 Rails 6.0.3.4
 
-$ rails new -d mysql --api multiple-db-sandbox
+$ rails new -d mysql --api rails-multiple-db-sandbox
 ```
 
 ## セットアップ
@@ -34,20 +34,12 @@ $ bin/rails db:seed
 ## 新しいモデルを追加する手順
 commonデータベースとschoolデータベースそれぞれに`Teacher`モデルを追加する手順の例
 
-### db:create
-
-```sh
-$ bin/rails db:create  # 全てのDBを作成
-$ bin/rails db:create:common  # commonデータベースだけ作成
-$ bin/rails db:create:school  # schoolデータベースだけ作成
-```
-
 ### generate migration
 
 ```sh
 # commonデータベースにteachersテーブルを作成
 # --databaseでcommonデータベースを指定
-# db/common_migrateディレクトリに作成される
+# db/common_migrateディレクトリにマイグレーションファイルが作成される
 $ bin/rails g migration CreateTeachers name:string --database common
 
 Running via Spring preloader in process 19119
@@ -56,7 +48,7 @@ Running via Spring preloader in process 19119
 
 
 # schoolデータベースにteachersテーブルを作成
-# db/school_migrateディレクトリに作成される
+# db/school_migrateディレクトリにマイグレーションファイルが作成される
 $ bin/rails g migration CreateTeachers name:string --database school
 
 Running via Spring preloader in process 19604
@@ -76,17 +68,17 @@ $ bin/rails db:migrate:school  # schoolデータベースのマイグレーシ�
 ### モデルファイルの作成
 
 - `app/models/common/teacher.rb`を作成する
-  - `Common:Base`を継承したクラスを作成する
+  - `Common::Base`を継承したクラスを作成する
 
 ```rb:app/models/common/teacher.rb
-class Common::Teacher < Common:Base
+class Common::Teacher < Common::Base
 end
 ```
 
 - `app/models/school/teacher.rb`を作成する
-  - `School:Base`を継承したクラスを作成する
+  - `School::Base`を継承したクラスを作成する
 
 ```rb:app/models/school/teacher.rb
-class School::Teacher < School:Base
+class School::Teacher < School::Base
 end
 ```
