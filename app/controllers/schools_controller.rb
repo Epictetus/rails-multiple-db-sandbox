@@ -1,14 +1,14 @@
 class SchoolsController < ApplicationController
   def index
-    render json: Common::School.all
+    render json: School.all
   end
 
   def show
-    render json: Common::School.find(params[:id])
+    render json: School.find(params[:id])
   end
 
   def create
-    school = Common::School.new(school_params)
+    school = School.new(school_params)
     if school.save
       render json: school
     else
@@ -17,7 +17,7 @@ class SchoolsController < ApplicationController
   end
 
   def update
-    school = Common::School.find(params[:id])
+    school = School.find(params[:id])
     if school.update(school_params)
       render json: school
     else
@@ -26,7 +26,7 @@ class SchoolsController < ApplicationController
   end
 
   def destroy
-    school = Common::School.find(params[:id])
+    school = School.find(params[:id])
     school.destroy!
     render json: school
   end
