@@ -1,6 +1,6 @@
 # rails-multiple-db-sandbox
 Rails6からActiveRecordで複数のデータベースが利用できるようになったので試す<br>
-[Railsガイド|Active Record で複数のデータベース利用](https://railsguides.jp/active_record_multiple_databases.html)
+参考：[Railsガイド|Active Record で複数のデータベース利用](https://railsguides.jp/active_record_multiple_databases.html)
 
 やったこと
 - 複数のデータベースを利用
