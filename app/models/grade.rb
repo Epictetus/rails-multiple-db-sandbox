@@ -1,3 +1,3 @@
 class Grade < SchoolBase
-  # has_many :students
+  has_many :students
 end

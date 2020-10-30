@@ -143,3 +143,11 @@ $ curl -X DELETE http://localhost:3000/schools/3
 
 ![image](https://user-images.githubusercontent.com/20487308/97646373-cc4bd000-1a92-11eb-9cde-2576a183cb55.png)
 
+
+
+## JOIN
+TODO
+- [ ] ログに接続しているデータベースを表示する
+  - https://edgeapi.rubyonrails.org/classes/ActiveRecord/ConnectionHandling.html
+- 各テーブルを`includes`した時にSQLを確認する
+  - 異なるDBでJOINできるのか
