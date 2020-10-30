@@ -32,56 +32,42 @@ $ bin/rails db:seed
 ```
 
 ## 新しいモデルを追加する手順
-commonデータベースとschoolデータベースそれぞれに`Teacher`モデルを追加する手順の例
+schoolデータベースに`Teacher`モデルを追加する手順の例
 
-### generate migration
+### generame model
 
 ```sh
-# commonデータベースにteachersテーブルを作成
-# --databaseでcommonデータベースを指定
-# db/common_migrateディレクトリにマイグレーションファイルが作成される
-$ bin/rails g migration CreateTeachers name:string --database common
+$ bin/rails g model teacher name:string --database school
 
-Running via Spring preloader in process 19119
+Running via Spring preloader in process 54763
       invoke  active_record
-      create    db/common_migrate/20201029214650_create_teachers.rb
+      create    db/school_migrate/20201030135726_create_teachers.rb
+      create    app/models/teacher.rb
+      invoke    test_unit
+      create      test/models/teacher_test.rb
+      create      test/fixtures/teachers.yml
+```
 
+`--database`でschoolデータベースを指定することで`db/school_migrate`ディレクトリにマイグレーションファイルが作成される
 
-# schoolデータベースにteachersテーブルを作成
-# db/school_migrateディレクトリにマイグレーションファイルが作成される
-$ bin/rails g migration CreateTeachers name:string --database school
+### モデルの継承クラスを変更
+デフォルトでは`ApplicationRecord`を継承しているが、Schoolデータベースを使用したいので**SchoolBaseを継承する**ように変更する
 
-Running via Spring preloader in process 19604
-      invoke  active_record
-      create    db/school_migrate/20201029214951_create_teachers.rb
+```diff
+- class Teacher < ApplicationRecord
++ class Teacher < SchoolBase
+  end
 ```
 
 ### db:migrate
 
 ```sh
-$ bin/rails db:migrate  # 全てのマイグレーションファイルを適用する
-$ bin/rails db:migrate:common  # commonデータベースのマイグレーションファイルを適用する
-$ bin/rails db:migrate:school  # schoolデータベースのマイグレーションファイルを適用する
+# 全てのマイグレーションファイルを適用する場合
+$ bin/rails db:migrate
+
+# schoolデータベースのマイグレーションファイルのみを適用する場合
+$ bin/rails db:migrate:school
 ```
-
-### モデルファイルの作成
-
-- `app/models/common/teacher.rb`を作成する
-  - **Common::Baseを継承した**クラスを作成する
-
-```rb:app/models/common/teacher.rb
-class Common::Teacher < Common::Base
-end
-```
-
-- `app/models/school/teacher.rb`を作成する
-  - **School::Baseを継承した**クラスを作成する
-
-```rb:app/models/school/teacher.rb
-class School::Teacher < School::Base
-end
-```
-
 
 ## リクエストによってprimary/replicaが切り替わっているかの確認
 replicaを用意することでPOST, PUT, DELETE, PATCHのリクエストはprimaryに書き込み、GET, HEADリクエストはreplicaから読み込むようになる<br>
@@ -114,7 +100,7 @@ class MultipleDatabaseConnectionLogger < Arproxy::Base
 end
 ```
 
-### リクエストログを確認
+### リクエスト時のデータベース接続状況を確認
 curlからリクエストを送信してログを見ると、呼び出されたデータベースとwritingかreadingかが表示される
 
 index
