@@ -171,4 +171,4 @@ User.joins(:students).where(name: 'ogawa')
 
 発生するエラー
 
-![image](src="https://user-images.githubusercontent.com/20487308/97771217-27a6bc80-1b7e-11eb-9c1c-16f0a941f41f.png)
+![image](https://user-images.githubusercontent.com/20487308/97771217-27a6bc80-1b7e-11eb-9c1c-16f0a941f41f.png)
