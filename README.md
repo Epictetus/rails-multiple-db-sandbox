@@ -146,8 +146,29 @@ $ curl -X DELETE http://localhost:3000/schools/3
 
 
 ## JOIN
-TODO
-- [ ] ログに接続しているデータベースを表示する
-  - https://edgeapi.rubyonrails.org/classes/ActiveRecord/ConnectionHandling.html
-- 各テーブルを`includes`した時にSQLを確認する
-  - 異なるDBでJOINできるのか
+### 同じデータベースのテーブル間はJOINできる
+studentsテーブルをgradeテーブルにJOINする場合
+
+```ruby
+Grade.joins(:students).where(name: 'grade1')
+```
+
+発行されるSQL
+
+```sql
+SELECT `grades`.*
+FROM `grades`
+INNER JOIN `students` ON `students`.`grade_id` = `grades`.`id`
+WHERE `grades`.`name` = 'grade1
+```
+
+### 異なるデータベースのテーブル間はJOINできない
+studentsテーブルをusersテーブルにJOINしようとした場合
+
+```ruby
+User.joins(:students).where(name: 'ogawa')
+```
+
+発生するエラー
+
+![image](src="https://user-images.githubusercontent.com/20487308/97771217-27a6bc80-1b7e-11eb-9c1c-16f0a941f41f.png)
