@@ -4,7 +4,7 @@ Rails6からActiveRecordで複数のデータベースが利用できるよう�
 
 やったこと
 - 複数のデータベースを作成
-  - `commonデータベース`と`schoolデータベース`
+  - commonデータベースとschoolデータベース
 - primary/replicaデータベースを利用
   - commonデータベースのreplicaと、schoolデータベースのreplica
 - GETリクエストはreplicaが呼び出されることを確認
